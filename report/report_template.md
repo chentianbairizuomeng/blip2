@@ -88,3 +88,31 @@ Image → Frozen Vision Encoder → Mini Q-Former → Projection Layer → Froze
 - 生成效果如何；
 - 遇到了什么问题；
 - 如果继续改进，可以怎么做。
+
+## 9. AI 对话过程记录
+
+请填写本次复现过程中与 AI 工具的对话记录（对应 requirements.md 第 9.1 节）。
+
+- 录制工具：例如 entir.io
+- 对话链接：
+- 使用的 AI 模型：例如 Claude / ChatGPT / Gemini
+- 累计对话时长 / 会话数：
+
+简要说明 AI 在哪些环节给了帮助、哪些地方是自己独立完成或推翻了 AI 的建议（2—4 句话即可）：
+
+```text
+（在这里写）
+```
+
+## 10. Git 提交记录
+
+请填写本次复现的代码仓库与提交历史（对应 requirements.md 第 9.2 节）。
+
+- 仓库地址：
+- 总 commit 数：
+
+粘贴 `git log --oneline` 输出（或截图）：
+
+```text
+（在这里粘贴 git log --oneline）
+```

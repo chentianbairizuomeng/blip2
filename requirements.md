@@ -142,3 +142,56 @@ https://huggingface.co/facebook/opt-125m
 
 4. **生成结果展示**  
    至少展示 3—5 张测试图片，并给出真实 caption 与模型生成 caption，用于说明模型能够根据图片生成文本。
+
+---
+
+## 9. 过程记录与防作弊要求
+
+为了确认作业是本人独立完成、而不是一次性让 AI 把整份代码生成出来，本次复现**必须**满足以下两条过程性要求。两条都不满足将视为未完成。
+
+### 9.1 AI 对话全过程记录
+
+要求使用 **entir.io**（或同类可分享的对话录制工具）记录与 AI（ChatGPT / Claude / Gemini 等）的**全部**开发对话，并在提交时附上可访问链接。
+
+要求：
+
+```text
+- 覆盖范围：从读数据、搭模型到训练、调 bug、写报告的全过程
+- 不能只录最后一段"成品对话"，中间的试错、报错、追问都要保留
+- 链接需可访问（公开或对老师/助教开放）
+```
+
+示例（提交时这样写即可）：
+
+```text
+AI 对话记录：https://entir.io/s/xxxxxx
+使用模型：Claude / ChatGPT
+对话时长：累计约 3 小时，分 5 次会话
+```
+
+### 9.2 Git 小步提交
+
+要求**每完成一个小模块就提交一次 commit**，禁止"一次性把整个项目 push 上去"。
+
+合格的 commit 粒度示例：
+
+```text
+feat: 加载 Flickr8k 前 200 张图片与 caption
+feat: 接入 CLIP ViT-B/32 作为 frozen vision encoder
+feat: 实现 Mini Q-Former 模块（含 learnable queries）
+feat: 添加 projection layer 对齐到 OPT 词向量空间
+feat: 接入 frozen OPT-125m 作为语言解码器
+feat: 实现训练 loop 与 cross entropy loss
+fix: 修复 caption tokenizer padding 与 attention mask 不一致
+feat: 添加 caption 生成脚本（greedy / beam search）
+docs: 补充实验报告与 loss 曲线
+```
+
+
+
+提交时一并附上：
+
+```text
+git log --oneline 的截图或文本输出
+仓库地址（GitHub / Gitee 均可）
+```
