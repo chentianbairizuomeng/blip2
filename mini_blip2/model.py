@@ -114,7 +114,9 @@ class MiniBlip2ForCaptioning(nn.Module):
             vision_outputs = self.vision_encoder(pixel_values=pixel_values)
             image_tokens = vision_outputs.last_hidden_state
         qformer_outputs = self.qformer(image_tokens)
-        return self.language_projection(qformer_outputs)
+        prefix = self.language_projection(qformer_outputs)
+        lm_dtype = self.language_decoder.model.decoder.embed_tokens.weight.dtype
+        return prefix.to(dtype=lm_dtype)
 
     def forward(
         self,
@@ -125,6 +127,7 @@ class MiniBlip2ForCaptioning(nn.Module):
     ):
         prefix_embeds = self.encode_image_prefix(pixel_values)
         token_embeds = self.language_decoder.model.decoder.embed_tokens(input_ids)
+        token_embeds = token_embeds.to(dtype=prefix_embeds.dtype)
         inputs_embeds = torch.cat([prefix_embeds, token_embeds], dim=1)
 
         prefix_attention = torch.ones(
