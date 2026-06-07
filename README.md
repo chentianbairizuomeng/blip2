@@ -1,30 +1,108 @@
-# Mini-BLIP2 复现作业包
+# Mini-BLIP2 Reproduction
 
-## 目录结构
+This repository contains a lightweight BLIP-2 style image captioning reproduction for the course assignment.
+
+## What Is Implemented
+
+- Frozen vision encoder: `openai/clip-vit-base-patch32`
+- Trainable bridge: custom Mini Q-Former
+- Trainable projection layer into language embedding space
+- Frozen language decoder: `facebook/opt-125m`
+- Flickr8k loader that reads the first 200 images and captions
+- Training and caption generation scripts
+
+## Repository Layout
 
 ```text
 blip2/
-├── README.md          # 本文件
-├── index.html         # 复现要求的网页版
-├── requirements.md    # 复现要求（Markdown 版）
-├── code/              # 存放实现代码
-├── data/              # 存放数据集（Flickr8k）
-└── report/
-    └── report_template.md  # 实验报告模板
+├── code/
+│   ├── dataset.py
+│   ├── model.py
+│   ├── train.py
+│   ├── generate.py
+│   └── utils.py
+├── data/
+├── report/
+├── index.html
+├── requirements.md
+└── requirements.txt
 ```
 
-## 文件说明
+## Manual Steps You Need To Do
 
-- `index.html`：复现要求的网页版，浏览器直接打开即可阅读。
-- `requirements.md`：复现要求的 Markdown 版，内容与 `index.html` 一致。
-- `code/`：放置本次复现的全部代码。
-- `data/`：放置 Flickr8k 数据集（仅本地使用，不要把数据集 push 到仓库）。
-- `report/report_template.md`：实验报告模板，按里面的章节填写。
+### 1. Download Flickr8k
 
-## 开始之前
+Download the dataset from:
 
-请先阅读 `index.html` 或 `requirements.md`，重点关注：
+https://www.kaggle.com/datasets/adityajn105/flickr8k
 
-- 第 4 节「模型结构要求」
-- 第 7 节「最低完成标准」
-- 第 9 节「过程记录与防作弊要求」（必看，涉及 AI 对话录制与 Git 提交节奏）
+Then extract it into `data/`. The loader supports common layouts such as:
+
+```text
+data/
+  Images/
+  captions.txt
+```
+
+or:
+
+```text
+data/
+  Flickr8k_Dataset/
+  Flickr8k.token.txt
+```
+
+### 2. Install Python dependencies
+
+```powershell
+pip install -r requirements.txt
+```
+
+### 3. Verify the dataset loader
+
+```powershell
+python -m code.dataset --data-root data --limit-images 200
+```
+
+### 4. Train the model
+
+```powershell
+python -m code.train --data-root data --output-dir outputs --epochs 3 --batch-size 2
+```
+
+### 5. Generate example captions
+
+```powershell
+python -m code.generate --data-root data --checkpoint outputs/mini_blip2_latest.pt --num-samples 5
+```
+
+## Entire + Git Workflow
+
+Entire has been enabled in this repository. To keep the assignment evidence complete:
+
+1. Work in small steps.
+2. Commit after each module.
+3. Keep the Entire-linked conversation process.
+4. Push your commits and checkpoint metadata after important milestones.
+
+Useful commands:
+
+```powershell
+git log --oneline
+git push
+```
+
+## Current Commit Milestones
+
+At this stage the repository already includes these small commits:
+
+- `chore: enable Entire tracking for Codex`
+- `feat: load Flickr8k first 200 images and captions`
+- `feat: implement Mini Q-Former bridge model`
+- `feat: add training and caption generation scripts`
+
+## Notes
+
+- Only the Mini Q-Former and projection layer are trainable.
+- The vision encoder and language decoder are frozen to match the assignment idea.
+- The final report should include training logs, generated captions, Entire conversation evidence, and Git commit history.
