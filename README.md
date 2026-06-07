@@ -16,6 +16,8 @@ This repository contains a lightweight BLIP-2 style image captioning reproductio
 ```text
 blip2/
 ├── code/
+│   └── (legacy empty folder)
+├── mini_blip2/
 │   ├── dataset.py
 │   ├── model.py
 │   ├── train.py
@@ -61,19 +63,19 @@ pip install -r requirements.txt
 ### 3. Verify the dataset loader
 
 ```powershell
-python -m code.dataset --data-root data --limit-images 200
+python -m mini_blip2.dataset --data-root data --limit-images 200
 ```
 
 ### 4. Train the model
 
 ```powershell
-python -m code.train --data-root data --output-dir outputs --epochs 3 --batch-size 2
+python -m mini_blip2.train --data-root data --output-dir outputs --epochs 3 --batch-size 2
 ```
 
 ### 5. Generate example captions
 
 ```powershell
-python -m code.generate --data-root data --checkpoint outputs/mini_blip2_latest.pt --num-samples 5
+python -m mini_blip2.generate --data-root data --checkpoint outputs/mini_blip2_latest.pt --num-samples 5
 ```
 
 ## Entire + Git Workflow

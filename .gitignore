@@ -1,3 +1,6 @@
 .omc/
 .tools/
 __pycache__/
+data/Images/
+data/captions.txt
+outputs/

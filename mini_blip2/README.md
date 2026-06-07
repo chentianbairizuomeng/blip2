@@ -19,5 +19,5 @@ data/
 Check the dataset with:
 
 ```powershell
-python -m code.dataset --data-root data --limit-images 200
+python -m mini_blip2.dataset --data-root data --limit-images 200
 ```
